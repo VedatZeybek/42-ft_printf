@@ -2,12 +2,34 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+void	putnbr(int	num)
+{
+	char result;
+	if (num == INT_MIN || num == -2147483648)
+	{
+		write(1, "-2", 1);
+		num = 147483648;
+	}
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num *= -1;		
+	}
+	if (num > 9)
+	{
+		putnbr(num/10);
+	}
+	result = num % 10 + '0';
+	write(1, &result, 1);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		i;
-	char	c;
-	char	*s;
+	char	character;
+	char	*string;
+	int		integer;
 	
 	i = 0;
 	va_start(args, format);
@@ -15,17 +37,23 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%' && format[i + 1] == 'c')
 		{
-			c = va_arg(args, int);
-			write(1, &c, 1);
+			character = va_arg(args, int);
+			write(1, &character, 1);
 			i++;
 		}
 		else if (format[i] == '%' && format[i + 1] == 's')
 		{
-			s = malloc(strlen(s));
-			if (!s)
+			string = malloc(strlen(string));
+			if (!string)
 				return (0);
-			s = va_arg(args, char *);
-			write(1, s, strlen(s));
+				string = va_arg(args, char *);
+			write(1, string, strlen(string));
+			i++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'd')
+		{
+			integer = va_arg(args, long);
+			putnbr(integer);
 			i++;
 		}
 		else
@@ -41,7 +69,7 @@ int	ft_printf(const char *format, ...)
 int	main()
 {
 	char character = 'f';
-	int integer = 20;
+	int integer = -5420000;
 	char	*string = "selam";
 	ft_printf("%c %s %d ", character, string, integer);
 }
