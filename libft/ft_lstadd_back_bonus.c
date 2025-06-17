@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 20:35:32 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/03 22:08:10 by vzeybek          ###   ########.fr       */
+/*   Created: 2025/06/02 12:13:11 by vzeybek           #+#    #+#             */
+/*   Updated: 2025/06/03 22:09:52 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (c >= 0 && c <= 127)
+	t_list	*last_node;
+
+	if (!lst || !new)
+		return ;
+	last_node = ft_lstlast(*lst);
+	if (last_node == NULL)
 	{
-		return (1);
+		*lst = new;
+		return ;
 	}
-	return (0);
+	last_node->next = new;
 }

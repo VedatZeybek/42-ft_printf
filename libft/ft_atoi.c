@@ -6,42 +6,58 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:12:37 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 21:17:13 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/11 18:18:02 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_space(int c)
+static int	ft_skipspace(const char *str)
 {
-	if (c == 32 || (c >= 9 && c <= 13))
-		return (1);
-	return (0);
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	return (i);
+}
+
+static int	control_overflow(int sign, long result, char c)
+{
+	if (sign == 1 && (result > 922337203685477580
+			|| (result == 922337203685477580 && (c - '0') > 7)))
+		return (-1);
+	if (sign == -1 && (result > 922337203685477580
+			|| (result == 922337203685477580 && (c - '0') > 7)))
+		return (0);
+	return (1);
 }
 
 int	ft_atoi(const char *str)
 {
-	int			i;
-	int			factor;
-	long long	result;
+	size_t		i;
+	int			sign;
+	long		result;
+	int			control;
 
-	i = 0;
-	factor = 1;
 	result = 0;
-	while (is_space(str[i]))
-		i++;
+	if (str[0] == '\0')
+		return (result);
+	i = ft_skipspace(str);
+	sign = 1;
+	if (str[i] == '-')
+		sign = -1;
 	if (str[i] == '+' || str[i] == '-')
+		i++;
+	while (str[i] >= 48 && str[i] <= 57)
 	{
-		if (str[i] == '-')
-			factor *= -1;
+		control = control_overflow(sign, result, str[i]);
+		if (control != 1)
+			return (control);
+		result = (result * 10) + (str[i] - '0');
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if (result > 9223372036854775807 || result < -9223372036854775807)
-			return (0);
-		result = (result * 10) + str[i] - '0';
-		i++;
-	}
-	return (result * factor);
+	result = result * sign;
+	return (result);
 }

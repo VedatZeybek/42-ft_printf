@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/26 20:35:32 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/03 22:08:10 by vzeybek          ###   ########.fr       */
+/*   Created: 2025/06/02 12:14:42 by vzeybek           #+#    #+#             */
+/*   Updated: 2025/06/02 18:30:42 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isascii(int c)
+#include "libft.h"
+
+t_list	*ft_lstlast(t_list *lst)
 {
-	if (c >= 0 && c <= 127)
+	if (!lst)
+		return (NULL);
+	while (lst->next)
 	{
-		return (1);
+		lst = lst->next;
 	}
-	return (0);
+	return (lst);
 }

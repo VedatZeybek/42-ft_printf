@@ -6,7 +6,7 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 18:06:56 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 22:20:52 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/04 00:59:46 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,43 @@ static char	*malloc_word(const char *str, char c)
 	return (word);
 }
 
-char	**ft_split(const char *str, char c)
+static char	**ft_freeall_words(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+	return (NULL);
+}
+
+char	**ft_split(const char *s, char c)
 {
 	int		total;
 	char	**result;
 	int		i;
 
-	total = word_count(str, c);
+	total = word_count(s, c);
 	result = (char **)malloc(sizeof(char *) * (total + 1));
 	if (!result)
 		return (NULL);
 	i = 0;
-	while (*str)
+	while (*s)
 	{
-		while (*str && is_charsequivalent(*str, c))
-			str++;
-		if (*str && !is_charsequivalent(*str, c))
+		while (*s && is_charsequivalent(*s, c))
+			s++;
+		if (*s && !is_charsequivalent(*s, c))
 		{
-			result[i++] = malloc_word(str, c);
-			while (*str && !is_charsequivalent(*str, c))
-				str++;
+			result[i] = malloc_word(s, c);
+			if (!result[i])
+				return (ft_freeall_words(result));
+			i++;
+			while (*s && !is_charsequivalent(*s, c))
+				s++;
 		}
 	}
 	result[i] = NULL;

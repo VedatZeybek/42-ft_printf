@@ -6,7 +6,7 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:43:43 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 18:53:49 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/11 09:33:26 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	char	c;
-	char	min;
+	char	minus;
 
-	min = '-';
+	minus = '-';
 	if (n == -2147483648)
 	{
 		write(fd, "-2147483648", 11);
 	}
 	else if (n < 0)
 	{
-		write(fd, &min, 1);
+		write(fd, &minus, 1);
 		ft_putnbr_fd(-n, fd);
 	}
 	else if (n > 9)
@@ -34,7 +34,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else if (n >= 0 && n <= 9)
 	{
-		c = '0' + n;
+		c = 48 + n;
 		write(fd, &c, 1);
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:11:46 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 19:13:45 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/03 12:08:43 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int num)
+int	ft_isdigit(int c)
 {
-	if (num >= '0' && num <= '9')
+	if (c >= '0' && c <= '9')
 	{
 		return (1);
 	}

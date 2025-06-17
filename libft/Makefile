@@ -1,95 +1,49 @@
-NAME = libft.a
-SRCS =	 ft_atoi.c\
-			ft_bzero.c\
-			ft_calloc.c\
-			ft_isalnum.c\
-			ft_isalpha.c\
-			ft_isascii.c\
-			ft_isdigit.c\
-			ft_isprint.c\
-			ft_itoa.c\
-			ft_memchr.c\
-			ft_memcmp.c\
-			ft_memcpy.c\
-			ft_memmove.c\
-			ft_memset.c\
-			ft_putchar_fd.c\
-			ft_putnbr_fd.c\
-			ft_putstr_fd.c\
-			ft_putendl_fd.c\
-			ft_split.c\
-			ft_strchr.c\
-			ft_strdup.c\
-			ft_striteri.c\
-			ft_strjoin.c\
-			ft_strlcat.c\
-			ft_strlcpy.c\
-			ft_strlen.c\
-			ft_strmapi.c\
-			ft_strncmp.c\
-			ft_strnstr.c\
-			ft_strrchr.c\
-			ft_strtrim.c\
-			ft_substr.c\
-			ft_tolower.c\
-			ft_toupper.c 
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/03 23:47:44 by vzeybek           #+#    #+#              #
+#    Updated: 2025/06/04 04:18:18 by vzeybek          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-SRCS_BONUS =	ft_lstadd_back.c\
-					ft_lstadd_front.c\
-					ft_lstclear.c\
-					ft_lstdelone.c\
-					ft_lstlast.c\
-					ft_lstmap.c\
-					ft_lstnew.c\
-					ft_lstsize.c\
-					ft_lstiter.c
-	
-OBJS = $(SRCS:.c=.o)
-BONUS_OBJS = $(SRCS_BONUS:.c=.o)
+SRCS			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
+					ft_strlcat.c ft_strncmp.c ft_substr.c ft_atoi.c ft_isalpha.c \
+					ft_itoa.c ft_memcpy.c  ft_putendl_fd.c ft_strchr.c  ft_strlcpy.c \
+					ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c  \
+					ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
+					ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
+					ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_striteri.c
+OBJS			= $(SRCS:.c=.o)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+BONUS			=	ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
+					ft_lstdelone_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
+					ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
+BONUS_OBJS		= $(BONUS:.c=.o)
 
-AR = ar rcs
-
-RM= rm -rf
+NAME			= libft.a
+CC				= cc
+RM				= rm -f
+CFLAGS			= -Wall -Wextra -Werror
 
 
-BONUS_FLAG = .bonus
-$(BONUS_FLAG): $(OBJS) $(BONUS_OBJS)
+all:			$(NAME)
 
-GREEN = \033[0;32m
-YELLOW = \033[0;33m
-RED = \033[0;31m
-BLUE = \033[0;34m
-RESET = \033[0m
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	@echo "$(YELLOW)Creating library $(NAME)...$(RESET)"
-	@$(AR) $(NAME) $(OBJS)
-	@echo "$(GREEN)✓ $(NAME) created successfully!$(RESET)"
-
-%.o: %.c
-	@echo "$(YELLOW)Compiling $<...$(RESET)"
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-bonus: $(BONUS_OBJS)
-	@echo "$(YELLOW)Creating library $(NAME) with bonus...$(RESET)"
-	@$(AR) $(NAME) $(BONUS_OBJS)
-	@echo "$(GREEN)✓ $(NAME) with bonus created successfully!$(RESET)"
+$(NAME):		$(OBJS)
+				ar rcs $(NAME) $(OBJS)
 
 clean:
-	@echo "$(RED)Removing object files...$(RESET)"
-	@$(RM) $(OBJS) $(BONUS_OBJS)
-	@echo "$(GREEN)✓ Object files removed!$(RESET)"
+				$(RM) $(OBJS) $(BONUS_OBJS)
 
-fclean: clean
-	@echo "$(RED)Removing $(NAME)...$(RESET)"
-	@$(RM) $(NAME)
-	@echo "$(GREEN)✓ $(NAME) removed!$(RESET)"
+fclean:			clean
+				$(RM) $(NAME)
 
-re: fclean all
+re:				fclean all
 
-.PHONY: all clean fclean re bonus
+bonus:			$(OBJS) $(BONUS_OBJS)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
+.PHONY:			all clean fclean re bonus

@@ -6,13 +6,13 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:11:44 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 18:43:11 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/03 12:09:44 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isprint(int a)
+int	ft_isprint(int c)
 {
-	if (a >= 32 && a < 127)
+	if (c >= 32 && c < 127)
 		return (1);
 	return (0);
 }

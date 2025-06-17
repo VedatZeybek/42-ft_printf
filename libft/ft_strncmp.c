@@ -6,7 +6,7 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:12:21 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/02 18:41:08 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/11 10:00:46 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,17 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned char	*s1u;
-	unsigned char	*s2u;
+	unsigned char	*s1unsigned;
+	unsigned char	*s2unsigned;
 	size_t			i;
 
-	s1u = (unsigned char *)s1;
-	s2u = (unsigned char *)s2;
+	s1unsigned = (unsigned char *)s1;
+	s2unsigned = (unsigned char *)s2;
 	i = 0;
-	while (i < n)
+	while (i < n && (s1[i] || s2[i]))
 	{
-		if (s1u[i] == '\0' && s2u[i] == '\0')
-			return (0);
-		else if (!s1u[i] && s2u[i])
-			return (-s2u[i]);
-		else if (!s2u[i] && s1u[i])
-			return (s1u[i]);
-		else if (s1u[i] != s2u[i])
-			return (s1u[i] - s2u[i]);
+		if (s1unsigned[i] != s2unsigned[i])
+			return (s1unsigned[i] - s2unsigned[i]);
 		i++;
 	}
 	return (0);
