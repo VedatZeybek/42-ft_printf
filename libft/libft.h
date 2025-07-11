@@ -6,12 +6,12 @@
 /*   By: vzeybek <vzeybek@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 12:55:29 by vzeybek           #+#    #+#             */
-/*   Updated: 2025/06/17 19:10:40 by vzeybek          ###   ########.fr       */
+/*   Updated: 2025/06/03 23:28:40 by vzeybek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-# define LIBFT_H
+# define    LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>
